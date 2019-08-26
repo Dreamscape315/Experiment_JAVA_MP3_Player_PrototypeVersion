@@ -33,7 +33,7 @@ public class Mp3Player extends JFrame {
 	private States state = null;
 	public Mp3Player()
 	{
-		super("MP3²¥·ÅÆ÷");
+		super("MP3æ’­æ”¾å™¨");
 		initComponents();
 		jButtonStart.setEnabled(false);
 		jButtonStop.setEnabled(false);
@@ -93,7 +93,7 @@ public class Mp3Player extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				//
-				// TODO: ÔÚ´ËÌí¼Ó´úÂë
+				// TODO: åœ¨æ­¤æ·»åŠ ä»£ç 
 				//
 				
 			}
@@ -106,7 +106,7 @@ public class Mp3Player extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				//
-				// TODO: ÔÚ´ËÌí¼Ó´úÂë
+				// TODO: åœ¨æ­¤æ·»åŠ ä»£ç 
 				//
 			
 			}
@@ -145,7 +145,7 @@ public class Mp3Player extends JFrame {
 		
 
 		//
-		// TODO: ÔÚ´ËÌí¼Ó´úÂë
+		// TODO: åœ¨æ­¤æ·»åŠ ä»£ç 
 		//
 	
 		

@@ -48,13 +48,13 @@ public class Play extends Thread {
 			}
 			file = new File(playlist.get(Currindex));
 			audioInputStream = AudioSystem.getAudioInputStream(file);
-			// 获得音频格式
+			// 鑾峰緱闊抽鏍煎紡
 			Format = audioInputStream.getFormat();
 			int bitrate = 0;
 			
 			if(Format.properties().get("bitrate") != null)
 			{
-				// 取得播放速度（单位：位每秒）
+				// 鍙栧緱鎾斁閫熷害锛堝崟浣嶏細浣嶆瘡绉掞級
 				bitrate = (int)((Integer)(Format.properties().get("bitrate")));
 				if(bitrate != 0)
 				{
@@ -62,7 +62,7 @@ public class Play extends Thread {
 				}
 			}
 
-			// 音频格式转换
+			// 闊抽鏍煎紡杞崲
 			Format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
 					Format.getSampleRate(),
 					16,
@@ -104,7 +104,7 @@ public class Play extends Thread {
 	public void Next()
 	{
 		//
-		// TODO: 在此添加代码
+		// TODO: 鍦ㄦ娣诲姞浠ｇ爜
 		//
 	
 	}
@@ -113,7 +113,7 @@ public class Play extends Thread {
 	{
 
 		//
-		// TODO: 在此添加代码
+		// TODO: 鍦ㄦ娣诲姞浠ｇ爜
 		//
 
 	}
