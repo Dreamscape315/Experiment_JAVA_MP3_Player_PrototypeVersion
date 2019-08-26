@@ -20,7 +20,6 @@ make:
     - mkdir bin
     - javac -encoding utf-8 -d bin src/com/engintime/programming/simplemp3player/*.java
     - jar cvfm ${MAINCLASSNAME} MANIFEST.MF -C bin/ .  
-    - execscore.sh 60
   only: 
     - master 
     
