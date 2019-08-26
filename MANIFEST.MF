@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: engintime
+Class-Path: .
+Main-Class: com.engintime.programming.simplemp3player.Mp3Player
