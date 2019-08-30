@@ -34,4 +34,4 @@
 
 
 # 教师参考答案
-访问教师参考答案[domain relative url](engintime/Eclipse-Group/teachers-packet/java-lang/JLab068.git)
+请教师用户首先访问[教师项目群组](https://www.codecode.net/engintime/Eclipse-Group/teachers-packet/java-lang),申请权限并审核通过后，再[domain relative url](engintime/Eclipse-Group/teachers-packet/java-lang/JLab068.git)访问本项目的参考答案
