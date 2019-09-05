@@ -18,7 +18,7 @@ make:
   script:
     - java -version
     - mkdir bin
-    - javac -encoding utf-8 -d bin src/com/engintime/programming/simplemp3player/*.java
+    - javac -encoding utf-8 -d bin -cp lib/jl1.0.1.jar src/com/engintime/programming/simplemp3player/*.java
     - jar cvfm ${MAINCLASSNAME} MANIFEST.MF -C bin/ .  
   only: 
     - master 
