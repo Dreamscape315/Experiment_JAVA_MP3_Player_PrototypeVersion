@@ -12,6 +12,12 @@ variables:
     - ubuntu-16.04
     - short-job
 
+.codecode-analysis-runner: &codecode-analysis-runner
+  tags:
+    - ubuntu-16.04
+    - short-job
+    - code-analysis
+
 make:
   stage: make
   <<: *codecode-runner
@@ -25,7 +31,7 @@ make:
     
 code-analysis:
   stage: code-analysis
-  <<: *codecode-runner
+  <<: *codecode-analysis-runner
   script:
     - mvn --batch-mode verify sonar:sonar -Dsonar.projectKey=ProjectKey-$CI_PROJECT_ID -Dsonar.projectName=$CI_PROJECT_NAME -Dsonar.links.homepage=$CI_PROJECT_URL -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.url=$CODECODE_PROTOCOL$CODECODE_DOMAIN
   allow_failure: true
