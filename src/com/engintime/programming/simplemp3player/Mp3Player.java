@@ -108,13 +108,14 @@ public class Mp3Player extends JFrame {
 			else {
 				System.out.println("it must more than 1 music");
 			}
+
 			try {
 				Thread.sleep(500);
-				state.setStart();
-
 			} catch (InterruptedException ex) {
 				ex.printStackTrace();
 			}
+			state.setStart();
+
 
 		});
 		/*-------------------------next-----------------------------**/
@@ -189,22 +190,6 @@ public class Mp3Player extends JFrame {
 		/*-------------------------PlayProgress-----------------------------**/
 		jSliderPlayProgress = new JSlider();
 		jSliderPlayProgress.setOpaque(false);
-		jSliderPlayProgress.addAncestorListener(new AncestorListener() {
-			@Override
-			public void ancestorAdded(AncestorEvent event) {
-
-			}
-
-			@Override
-			public void ancestorRemoved(AncestorEvent event) {
-
-			}
-
-			@Override
-			public void ancestorMoved(AncestorEvent event) {
-
-			}
-		});
 		/*-------------------------PlayProgress-----------------------------**/
 
 

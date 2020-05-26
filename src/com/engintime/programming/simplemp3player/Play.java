@@ -185,6 +185,7 @@ public class Play extends Thread {
 							lock.wait();
 						}
 						catch(InterruptedException ignored) {
+
 						}
 					}
 					if(!line.isRunning()&&!getPause()) {
@@ -229,12 +230,20 @@ public class Play extends Thread {
 				}
 
 				while (state.getStop()) {
-					try {
+					synchronized (lock){
+						try {
+							lock.wait(5);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						lock.notifyAll();
+					}
+					/*try {
 						Thread.sleep(5);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					}*/
 				}
 				init();
 			}
