@@ -1,12 +1,13 @@
 package com.engintime.programming.simplemp3player;
 
-import javax.swing.JButton;
+import javax.swing.*;
 
 public class States {
 	private boolean start;
 	private boolean stop;
 	private JButton jButtonStart;
 	private JButton jButtonStop;
+
 	public States(JButton jButtonStart, JButton jButtonStop)
 	{
 		start = true;
@@ -23,6 +24,8 @@ public class States {
 	{
 		return stop;
 	}
+
+
 	public void setStart()
 	{
 		if(start == false)
@@ -40,12 +43,12 @@ public class States {
 
 	public void setStop()
 	{
-		if(start == true)
+		if(start)
 		{
 			start = false;
 		}
 
-		if(stop == false)	
+		if(!stop)
 		{
 			stop = true;
 		}
@@ -53,4 +56,7 @@ public class States {
 		jButtonStop.setEnabled(false);
 	
 	}
+
+
+
 }

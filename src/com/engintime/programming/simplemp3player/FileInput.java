@@ -49,7 +49,5 @@ public class FileInput {
 	{
 		return f;
 	}
-	
-	
-	
+
 }
