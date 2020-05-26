@@ -20,7 +20,6 @@
       <groupId>javazoom.jl</groupId>
       <artifactId>jl</artifactId>
       <scope>system</scope>
-      <version>1.0.1</version>
     </dependency>
   </dependencies>
 
