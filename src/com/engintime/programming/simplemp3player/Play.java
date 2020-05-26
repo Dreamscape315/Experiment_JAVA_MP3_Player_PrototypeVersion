@@ -1,21 +1,11 @@
 package com.engintime.programming.simplemp3player;
 
 
-import java.io.*;
+import javax.sound.sampled.*;
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
-
-import javazoom.jl.player.Player;
-
-import javax.swing.JOptionPane;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-import javax.swing.JSlider;
 
 public class Play extends Thread {
 	private  boolean paused = false;
@@ -38,14 +28,10 @@ public class Play extends Thread {
 	}
 
 
-
-
-
-	private File file = null;
-	private States state = null;
+	private States state;
 	public int Currindex = 0;
 	private FloatControl volume = null;
-	private Vector<String> playlist = null;
+	private Vector<String> playlist;
 
 
 	private SourceDataLine line = null;//line是sourcedata
@@ -55,10 +41,6 @@ public class Play extends Thread {
 	private JSlider jSliderVolume;
 
 
-
-
-	private DataLine.Info info = null;
-	private AudioFormat Format = null;
 	private AudioInputStream audioInputStream = null;
 	private long time = 0;
 	public Play(Vector<String> playlist, 
@@ -82,7 +64,7 @@ public class Play extends Thread {
 				volume= (FloatControl)line.getControl( FloatControl.Type.MASTER_GAIN );
 				jSliderVolume.setMinimum((int)volume.getMinimum());
 				jSliderVolume.setMaximum((int)volume.getMaximum());
-				volume.setValue((float)(volume.getMinimum()+(4*(volume.getMaximum()-volume.getMinimum()))/5));
+				volume.setValue(volume.getMinimum()+(4*(volume.getMaximum()-volume.getMinimum()))/5);
 			}
 		}
 		else
@@ -104,16 +86,16 @@ public class Play extends Thread {
 			{
 				line.close();
 			}
-			file = new File(playlist.get(Currindex));
+			File file = new File(playlist.get(Currindex));
 			audioInputStream = AudioSystem.getAudioInputStream(file);
 			// 获得音频格式
-			Format = audioInputStream.getFormat();
-			int bitrate = 0;
+			AudioFormat format = audioInputStream.getFormat();
+			int bitrate;
 			
-			if(Format.properties().get("bitrate") != null)
+			if(format.properties().get("bitrate") != null)
 			{
 				// 取得播放速度（单位：位每秒）
-				bitrate = (int)((Integer)(Format.properties().get("bitrate")));
+				bitrate = (Integer)(format.properties().get("bitrate"));
 				if(bitrate != 0)
 				{
 					time = (file.length() * 8000000)/bitrate;
@@ -124,20 +106,20 @@ public class Play extends Thread {
 			jSliderPlayProgress.setValue(0);
 
 			// 音频格式转换
-			Format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
-					Format.getSampleRate(),
+			format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+					format.getSampleRate(),
 					16,
-					Format.getChannels(),
-					Format.getChannels() * 2,
-					Format.getSampleRate(),
+					format.getChannels(),
+					format.getChannels() * 2,
+					format.getSampleRate(),
 					false);
-			audioInputStream = AudioSystem.getAudioInputStream(Format, audioInputStream);
-			
+			audioInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
 
-			info = new DataLine.Info(SourceDataLine.class, Format);
+
+			DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
 			try{
 				line = (SourceDataLine)AudioSystem.getLine(info);
-				line.open(Format);
+				line.open(format);
 				setVolume();
 				line.start();	
 			}
@@ -155,12 +137,7 @@ public class Play extends Thread {
 		}
 	}
 
-	
-	public int getCurrindex()
-	{
-		return Currindex;
-	}
-	
+
 	public void Next()
 	{
 		if (Currindex+1<=playlist.size()-1){
@@ -193,9 +170,9 @@ public class Play extends Thread {
 	public void run()
 	{
 
-		int nBytesRead = 0;
+		int nBytesRead;
 		byte[] abData = new byte[102400];
-		while(true)
+		while(!state.getStop())
 		{
 			nBytesRead = 0;
 			synchronized (lock) {
@@ -207,7 +184,7 @@ public class Play extends Thread {
 						try {
 							lock.wait();
 						}
-						catch(InterruptedException e) {
+						catch(InterruptedException ignored) {
 						}
 					}
 					if(!line.isRunning()&&!getPause()) {

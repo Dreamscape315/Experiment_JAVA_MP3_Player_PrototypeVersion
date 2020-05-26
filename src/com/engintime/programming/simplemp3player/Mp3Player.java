@@ -2,12 +2,8 @@ package com.engintime.programming.simplemp3player;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 
 import javax.swing.event.*;
-
-import javazoom.jl.player.Player;
 
 import java.util.Vector;
 
@@ -15,110 +11,86 @@ import javax.swing.*;
 
 public class Mp3Player extends JFrame {
 
-	private JButton jButtonPause;
 	private JButton jButtonStart;
 	private JButton jButtonStop;
-	private JList jListMusic; 
-	private JMenuBar jMenuBarPlayer;
-	private JMenu jMenuFile;
-	private JMenuItem jMenuItemOpen;
-	private JMenuItem jMenuItemExit;
-	private JMenu jMenuPlay;
+	private JList<String> jListMusic;
 	private JMenuItem jMenuItemPrevious;
 	private JMenuItem jMenuItemNext;
-	private JPanel jPaneSouth;
-	private JPanel jPaneControl;
 	private Timer timer;
 	private JSlider jSliderPlayProgress;
 	private JSlider jSliderVolume;
-	private JTextArea jTextArea;
 	public static Mp3Player musicplayer = null;
 	private FileInput fileinput = null;
 	private Vector<String> playlist;
 	private Play play = null;
-	private States state = null;
+	private States state;
 	public Mp3Player()
 	{
 		super("MP3播放器");
 		initComponents();
 		jButtonStart.setEnabled(false);
 		jButtonStop.setEnabled(false);
-		playlist = new Vector<String>();
+		playlist = new Vector<>();
 		state = new States(jButtonStart, jButtonStop);
 	}
 	private void initComponents() {
-		jMenuBarPlayer = new JMenuBar();
-		jMenuFile = new JMenu("File");
-		jMenuItemOpen = new JMenuItem("Open");
-		jMenuItemOpen.addActionListener(new ActionListener(){
-	
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				if(fileinput == null)
+		JMenuBar jMenuBarPlayer = new JMenuBar();
+		JMenu jMenuFile = new JMenu("File");
+		JMenuItem jMenuItemOpen = new JMenuItem("Open");
+		jMenuItemOpen.addActionListener(evt -> {
+			if(fileinput == null)
+			{
+				fileinput = new FileInput(musicplayer);
+				fileinput.open();
+				String[] list = fileinput.getFileNames();
+				if(list != null)
 				{
-					fileinput = new FileInput(musicplayer);
-					fileinput.open();
-					String[] list = fileinput.getFileNames();
-					if(list != null)
-					{
-						for (String s : list) {
-							playlist.add(s);
-							jListMusic.setListData(playlist);
-						}
+					for (String s : list) {
+						playlist.add(s);
+						jListMusic.setListData(playlist);
 					}
-					if(play == null)
-					{				 
-						play = new Play(playlist,  state,jSliderVolume,jSliderPlayProgress);
-						play.star();
-					}
-					if (playlist.size() == 1||playlist.size() == 0) {
-						jMenuItemPrevious.setEnabled(false);
-						jMenuItemNext.setEnabled(false);
-					}
-
 				}
-				
-			}
-		});
-		jMenuItemExit = new JMenuItem("Exit");
-		jMenuItemExit.addActionListener(new ActionListener(){
+				if(play == null)
+				{
+					play = new Play(playlist,  state,jSliderVolume,jSliderPlayProgress);
+					play.star();
+				}
+				if (playlist.size() == 1||playlist.size() == 0) {
+					jMenuItemPrevious.setEnabled(false);
+					jMenuItemNext.setEnabled(false);
+				}
 
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				System.exit(0);			
 			}
+
 		});
+		JMenuItem jMenuItemExit = new JMenuItem("Exit");
+		jMenuItemExit.addActionListener(evt -> System.exit(0));
 		jMenuFile.add(jMenuItemOpen);
 		jMenuFile.add(jMenuItemExit);
-		jMenuPlay = new JMenu("Play");
+		JMenu jMenuPlay = new JMenu("Play");
 
 
 
 		/*-------------------------prev-----------------------------**/
 		jMenuItemPrevious = new JMenuItem("Prev");
-		jMenuItemPrevious.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (state.getStart()){
-					state.setStop();
-				}
-				if (playlist.size()>1){
-					play.Previous();
-				}
-				else {
-					System.out.println("it must more than 1 music");
-				}
-				try {
-					Thread.sleep(500);
-					state.setStart();
-
-				} catch (InterruptedException ex) {
-					// TODO Auto-generated catch block
-					ex.printStackTrace();
-				}
-
+		jMenuItemPrevious.addActionListener(e -> {
+			if (state.getStart()){
+				state.setStop();
 			}
+			if (playlist.size()>1){
+				play.Previous();
+			}
+			else {
+				System.out.println("it must more than 1 music");
+			}
+			try {
+				Thread.sleep(500);
+				state.setStart();
+
+			} catch (InterruptedException ex) {
+				ex.printStackTrace();
+			}
+
 		});
 		/*-------------------------prev-----------------------------**/
 
@@ -126,30 +98,24 @@ public class Mp3Player extends JFrame {
 
 		/*-------------------------next-----------------------------**/
 		jMenuItemNext = new JMenuItem("Next");
-		jMenuItemNext.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (state.getStart()){
-					state.setStop();
-				}
-				if (playlist.size()>1){
-					play.Next();
-				}
-				else {
-					System.out.println("it must more than 1 music");
-				}
-				try {
-					Thread.sleep(500);
-					state.setStart();
-
-				} catch (InterruptedException ex) {
-					// TODO Auto-generated catch block
-					ex.printStackTrace();
-				}
-			
+		jMenuItemNext.addActionListener(e -> {
+			if (state.getStart()){
+				state.setStop();
 			}
-			
+			if (playlist.size()>1){
+				play.Next();
+			}
+			else {
+				System.out.println("it must more than 1 music");
+			}
+			try {
+				Thread.sleep(500);
+				state.setStart();
+
+			} catch (InterruptedException ex) {
+				ex.printStackTrace();
+			}
+
 		});
 		/*-------------------------next-----------------------------**/
 
@@ -165,7 +131,7 @@ public class Mp3Player extends JFrame {
 
 
 		/*-------------------------music list-----------------------------**/
-		jListMusic = new JList();
+		jListMusic = new JList<>();
 		jListMusic.setFixedCellHeight(20);
 		jListMusic.setEnabled(true);
 		jListMusic.addMouseListener(new MouseAdapter() {
@@ -173,13 +139,10 @@ public class Mp3Player extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				if (e.getClickCount() == 1){
-					timer = new Timer(350, new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							System.out.println("You choose the NO."+(jListMusic.getSelectedIndex()+1)+" music,double click to play");
-							play.Currindex = jListMusic.getSelectedIndex();
-							timer.stop();
-						}
+					timer = new Timer(350, e1 -> {
+						System.out.println("You choose the NO."+(jListMusic.getSelectedIndex()+1)+" music,double click to play");
+						play.Currindex = jListMusic.getSelectedIndex();
+						timer.stop();
 					});
 					timer.restart();
 				}
@@ -206,13 +169,8 @@ public class Mp3Player extends JFrame {
 
 
 		/*-------------------------pause-----------------------------**/
-		jButtonPause = new JButton("Pause");
-		jButtonPause.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				play.setPause();
-			}
-		});
+		JButton jButtonPause = new JButton("Pause");
+		jButtonPause.addActionListener(evt -> play.setPause());
 		/*-------------------------pause-----------------------------**/
 
 
@@ -220,12 +178,9 @@ public class Mp3Player extends JFrame {
 		/*-------------------------volume-----------------------------**/
 		jSliderVolume = new JSlider();
 		jSliderVolume.setValue(0);
-		jSliderVolume.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				if (playlist.size() != 0)
-					play.getVolume().setValue(jSliderVolume.getValue());
-			}
+		jSliderVolume.addChangeListener(e -> {
+			if (playlist.size() != 0)
+				play.getVolume().setValue(jSliderVolume.getValue());
 		});
 		/*-------------------------volume-----------------------------**/
 
@@ -256,34 +211,22 @@ public class Mp3Player extends JFrame {
 
 		/*-------------------------Start-----------------------------**/
 		jButtonStart = new JButton("Start");
-		jButtonStart.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				state.setStart();		
-			}		
-		});
+		jButtonStart.addActionListener(evt -> state.setStart());
 		/*-------------------------Start-----------------------------**/
 
 
 
 		/*-------------------------Stop-----------------------------**/
 		jButtonStop = new JButton("Stop");
-		jButtonStop.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				state.setStop();			
-			}			
-		});
+		jButtonStop.addActionListener(evt -> state.setStop());
 		/*-------------------------Stop-----------------------------**/
 
 
-		jTextArea = new JTextArea("Volume");
+		JTextArea jTextArea = new JTextArea("Volume");
 		jTextArea.setOpaque(false);
-		jPaneSouth = new JPanel();
+		JPanel jPaneSouth = new JPanel();
 		jPaneSouth.setLayout(new GridLayout(3, 1));
-		jPaneControl = new JPanel();
+		JPanel jPaneControl = new JPanel();
 		jPaneControl.add(jButtonStart);
 		jPaneControl.add(jButtonPause);
 		jPaneControl.add(jButtonStop);

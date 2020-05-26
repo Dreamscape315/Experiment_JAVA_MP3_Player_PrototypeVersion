@@ -28,12 +28,12 @@ public class States {
 
 	public void setStart()
 	{
-		if(start == false)
+		if(!start)
 		{
 			start = true;
 		}
 
-		if(stop == true)
+		if(stop)
 		{
 			stop = false;
 		}

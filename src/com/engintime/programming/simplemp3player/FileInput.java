@@ -6,9 +6,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class FileInput {
-	private JFileChooser fdialog = null;
-	private File f[];
-	private String name[];
+	private JFileChooser fdialog;
+	private File[] f;
 	private JFrame jf;
 	public FileInput(JFrame jf)
 	{
@@ -18,14 +17,14 @@ public class FileInput {
 		fdialog.setFileFilter(my);
 		fdialog.setAcceptAllFileFilterUsed(false);
 		fdialog.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		fdialog.setMultiSelectionEnabled(true);			
+		fdialog.setMultiSelectionEnabled(true);
 	}
 	
 	public void open()
 	{
 		f = null;
 		int result = fdialog.showOpenDialog(jf);
-		if(result == fdialog.APPROVE_OPTION)
+		if(result == JFileChooser.APPROVE_OPTION)
 		{
 			f = fdialog.getSelectedFiles();
 		}
@@ -33,7 +32,7 @@ public class FileInput {
 	
 	public String[] getFileNames()
 	{
-		name = null;
+		String[] name = null;
 		if(f != null)
 		{
 			name = new String[f.length];
