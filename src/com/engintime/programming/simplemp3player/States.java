@@ -1,5 +1,11 @@
 package com.engintime.programming.simplemp3player;
-
+/* author
+ *
+ *
+Akatsuki Sky
+*
+ *
+ */
 import javax.swing.*;
 
 public class States {
@@ -60,3 +66,10 @@ public class States {
 
 
 }
+/* author
+ *
+ *
+Akatsuki Sky
+*
+ *
+ */

@@ -1,5 +1,11 @@
 package com.engintime.programming.simplemp3player;
-
+/* author
+ *
+ *
+Akatsuki Sky
+*
+ *
+ */
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
@@ -245,3 +251,10 @@ public class Mp3Player extends JFrame {
 
 	}
 }
+/* author
+ *
+ *
+Akatsuki Sky
+*
+ *
+ */

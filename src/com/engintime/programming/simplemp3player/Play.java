@@ -1,5 +1,11 @@
 package com.engintime.programming.simplemp3player;
-
+/* author
+ *
+ *
+Akatsuki Sky
+*
+ *
+ */
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -251,3 +257,10 @@ public class Play extends Thread {
 	}
 	
 }
+/* author
+ *
+ *
+Akatsuki Sky
+*
+ *
+ */
