@@ -1,5 +1,11 @@
 package com.engintime.programming.simplemp3player;
-
+/* author
+ *
+ *
+Akatsuki Sky
+*
+ *
+ */
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -50,3 +56,10 @@ public class FileInput {
 	}
 
 }
+/* author
+ *
+ *
+Akatsuki Sky
+*
+ *
+ */
