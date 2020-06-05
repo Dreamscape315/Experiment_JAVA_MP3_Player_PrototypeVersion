@@ -6,9 +6,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class FileInput {
-	private JFileChooser fdialog;
+	private final JFileChooser fdialog;
 	private File[] f;
-	private JFrame jf;
+	private final JFrame jf;
 	public FileInput(JFrame jf)
 	{
 		this.jf = jf;

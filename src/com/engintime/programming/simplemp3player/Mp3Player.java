@@ -2,9 +2,6 @@ package com.engintime.programming.simplemp3player;
 
 import java.awt.*;
 import java.awt.event.*;
-
-import javax.swing.event.*;
-
 import java.util.Vector;
 
 import javax.swing.*;
@@ -21,12 +18,12 @@ public class Mp3Player extends JFrame {
 	private JSlider jSliderVolume;
 	public static Mp3Player musicplayer = null;
 	private FileInput fileinput = null;
-	private Vector<String> playlist;
+	private final Vector<String> playlist;
 	private Play play = null;
-	private States state;
+	private final States state;
 	public Mp3Player()
 	{
-		super("MP3播放器");
+		super("MP3 Player");
 		initComponents();
 		jButtonStart.setEnabled(false);
 		jButtonStop.setEnabled(false);
@@ -170,7 +167,7 @@ public class Mp3Player extends JFrame {
 
 
 		/*-------------------------pause-----------------------------**/
-		JButton jButtonPause = new JButton("Pause");
+		JButton jButtonPause = new JButton("Pause/Continue");
 		jButtonPause.addActionListener(evt -> play.setPause());
 		/*-------------------------pause-----------------------------**/
 

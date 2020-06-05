@@ -5,8 +5,8 @@ import javax.swing.*;
 public class States {
 	private boolean start;
 	private boolean stop;
-	private JButton jButtonStart;
-	private JButton jButtonStop;
+	private final JButton jButtonStart;
+	private final JButton jButtonStop;
 
 	public States(JButton jButtonStart, JButton jButtonStop)
 	{
