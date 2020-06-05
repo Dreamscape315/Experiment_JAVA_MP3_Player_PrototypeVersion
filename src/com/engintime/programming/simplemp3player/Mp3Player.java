@@ -13,7 +13,7 @@ import java.util.Vector;
 import javax.swing.*;
 
 public class Mp3Player extends JFrame {
-
+//至少改改变量名吧？
 	private JButton jButtonStart;
 	private JButton jButtonStop;
 	private JList<String> jListMusic;
@@ -247,7 +247,8 @@ public class Mp3Player extends JFrame {
 			System.out.println("null Point");
 		}
 		
-		musicplayer.setVisible(true);	
+		musicplayer.setVisible(true);
+
 
 	}
 }
