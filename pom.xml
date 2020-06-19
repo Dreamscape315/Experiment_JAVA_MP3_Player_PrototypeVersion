@@ -1,31 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
 
-  <groupId>com.engintime.programming</groupId>
-  <artifactId>JLab068</artifactId>
-  <version>1.0</version>
-  <packaging>jar</packaging>
+<modelVersion>4.0.0</modelVersion>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
-  
-  <dependencies>
-    <dependency>
-      <groupId>javazoom.jl</groupId>
-      <artifactId>jl</artifactId>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/lib/jl1.0.1.jar</systemPath>
-      <version>1.0.1</version>
-    </dependency>
-  </dependencies>
+<groupId>com.engintime.programming</groupId>
 
-  <build>
-    <sourceDirectory>src</sourceDirectory>  
-  </build>
+<artifactId>JLab068</artifactId>
+
+<version>1.0</version>
+
+<packaging>jar</packaging>
+
+
+-<properties>
+
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+<maven.compiler.source>1.8</maven.compiler.source>
+
+<maven.compiler.target>1.8</maven.compiler.target>
+
+<sonar.issue.ignore.multicriteria>e1</sonar.issue.ignore.multicriteria>
+
+<sonar.issue.ignore.multicriteria.e1.ruleKey>squid:S3422</sonar.issue.ignore.multicriteria.e1.ruleKey>
+
+<sonar.issue.ignore.multicriteria.e1.resourceKey>*.xml</sonar.issue.ignore.multicriteria.e1.resourceKey>
+
+</properties>
+
+
+-<dependencies>
+
+
+-<dependency>
+
+<groupId>javazoom.jl</groupId>
+
+<artifactId>jl</artifactId>
+
+<scope>system</scope>
+
+<systemPath>${project.basedir}/lib/jl1.0.1.jar</systemPath>
+
+<version>1.0.1</version>
+
+</dependency>
+
+</dependencies>
+
+
+-<build>
+
+<sourceDirectory>src</sourceDirectory>
+
+</build>
+
 </project>
